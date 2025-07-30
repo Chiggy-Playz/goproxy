@@ -398,10 +398,13 @@ func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request
 						// with a status code of 1xx (Informational) or 204 (No Content)
 						resp.Header.Del("Content-Length")
 					} else {
-						// Since we don't know the length of resp, return chunked encoded response
-						// TODO: use a more reasonable scheme
-						resp.Header.Del("Content-Length")
-						resp.Header.Set("Transfer-Encoding", "chunked")
+						// If content length is not set, we set transfer encoding to chunked
+						if (resp.Header.Get("Content-Length") == "")  {	
+							// Since we don't know the length of resp, return chunked encoded response
+							// TODO: use a more reasonable scheme
+							resp.Header.Del("Content-Length")
+							resp.Header.Set("Transfer-Encoding", "chunked")
+						}
 					}
 					// Force connection close otherwise chrome will keep CONNECT tunnel open forever
 					if !isWebsocket {

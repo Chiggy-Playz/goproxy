@@ -3,6 +3,7 @@ module github.com/Chiggy-Playz/goproxy
 go 1.20
 
 require (
+	github.com/elazarl/goproxy v1.7.2
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/net v0.35.0
 )

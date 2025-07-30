@@ -1,8 +1,8 @@
 # GoProxy
 
-![Status](https://github.com/elazarl/goproxy/workflows/Go/badge.svg)
-[![GoDoc](https://pkg.go.dev/badge/github.com/elazarl/goproxy)](https://pkg.go.dev/github.com/elazarl/goproxy)
-[![Go Report](https://goreportcard.com/badge/github.com/elazarl/goproxy)](https://goreportcard.com/report/github.com/elazarl/goproxy)
+![Status](https://github.com/Chiggy-Playz/goproxy/workflows/Go/badge.svg)
+[![GoDoc](https://pkg.go.dev/badge/github.com/Chiggy-Playz/goproxy)](https://pkg.go.dev/github.com/Chiggy-Playz/goproxy)
+[![Go Report](https://goreportcard.com/badge/github.com/Chiggy-Playz/goproxy)](https://goreportcard.com/report/github.com/Chiggy-Playz/goproxy)
 [![BSD-3 License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Pull Requests](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 [![Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go?tab=readme-ov-file#networking)
@@ -22,13 +22,14 @@ Here is how you do that in [Chrome](https://www.wikihow.com/Connect-to-a-Proxy-S
 and in [Firefox](http://www.wikihow.com/Enter-Proxy-Settings-in-Firefox).
 If you decide to start with the `base` example, the URL you should use as
 proxy is `localhost:8080`, which is the default one in our example.
-You also have to [trust](https://github.com/elazarl/goproxy/blob/master/examples/customca/README.md)
+You also have to [trust](https://github.com/Chiggy-Playz/goproxy/blob/master/examples/customca/README.md)
 the proxy CA certificate, to avoid any certificate issue in the clients.
 
 > [✈️ Telegram Group](https://telegram.me/goproxygroup)
 
 ## Features
-- Perform certain actions only on `specific hosts`,  with a single equality comparison or with regex evaluation
+
+- Perform certain actions only on `specific hosts`, with a single equality comparison or with regex evaluation
 - Manipulate `requests` and `responses` before sending them to the browser
 - Use a `custom http.Transport` to perform requests to the target server
 - You can specify a `MITM certificates cache`, to reuse them later for other requests to the same host, thus saving CPU. Not enabled by default, but you should use it in production!
@@ -37,12 +38,14 @@ the proxy CA certificate, to avoid any certificate issue in the clients.
 - You can `disable` the HTTP request headers `canonicalization`, by setting `PreventCanonicalization` to true
 
 ## Proxy modes
+
 1. Regular HTTP proxy
 2. HTTPS through CONNECT
 3. HTTPS MITM ("Man in the Middle") proxy server, in which the server generate TLS certificates to parse request/response data and perform actions on them
 4. "Hijacked" proxy connection, where the configured handler can access the raw net.Conn data
 
 ## Sponsors
+
 Does your company use GoProxy? Ask your manager or marketing team
 if your company would be interested in supporting our project.
 Supporting this project will allow the maintainers to dedicate more time
@@ -50,6 +53,7 @@ for maintenance and new features for everyone.
 This will also benefit you, because maintainers will fix problems that will occur
 and keep GoProxy up to date for your projects.
 Moreover, your company logo will be shown on GitHub, in this README section.
+
 > [Apply Here](https://opencollective.com/goproxy)
 
 [![GoProxy Sponsor](https://opencollective.com/goproxy/tiers/sponsor/0/avatar)](https://opencollective.com/goproxy/tiers/sponsor/0/website)
@@ -58,6 +62,7 @@ Moreover, your company logo will be shown on GitHub, in this README section.
 [![GoProxy Sponsor](https://opencollective.com/goproxy/tiers/sponsor/3/avatar)](https://opencollective.com/goproxy/tiers/sponsor/3/website)
 
 ## Maintainers
+
 - [Elazar Leibovich](https://github.com/elazarl): Creator of the project, Software Engineer
 - [Erik Pellizzon](https://github.com/ErikPelli): Maintainer, Freelancer (open to collaborations!)
 
@@ -67,6 +72,7 @@ features to maintain in your fork, you can contact [Erik](mailto:erikpelli@tutam
 can help you as a paid independent consultant.
 
 ## Contributions
+
 If you have any trouble, suggestion, or if you find a bug, feel free to reach
 out by opening a GitHub `issue`.
 This is an `open source` project managed by volunteers, and we're happy
@@ -83,6 +89,7 @@ The code for this project is released under the `BSD 3-Clause` license,
 making it useful for `commercial` uses as well.
 
 ### Submit your case study
+
 So, you have introduced & integrated GoProxy into one of your personal projects
 or a project inside the company you work for.
 
@@ -100,11 +107,13 @@ The purpose of case studies is to share with the `community` why all the
 what people are building using it.
 
 ### Linter
+
 The codebase uses an automatic lint check over your Pull Request code.
 Before opening it, you should check if your changes respect it, by running
 the linter in your local machine, so you won't have any surprise.
 
 To install the linter:
+
 ```sh
 go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 ```
@@ -128,7 +137,7 @@ import (
     "log"
     "net/http"
 
-    "github.com/elazarl/goproxy"
+    "github.com/Chiggy-Playz/goproxy"
 )
 
 func main() {
@@ -139,6 +148,7 @@ func main() {
 ```
 
 ### Request handler
+
 This line will add `X-GoProxy: yxorPoG-X` header to all requests sent through the proxy,
 before sending them to the destination:
 
@@ -162,6 +172,7 @@ interface in your type.
 > and send the specified response to the client.
 
 ### Conditional Request handler
+
 Refuse connections to www.reddit.com between 8 and 17 in the server
 local timezone:
 
@@ -188,8 +199,9 @@ a response in `DoFunc()`, so the remote destination will not receive the
 request and the client will receive the `"Don't waste your time!"` response.
 
 ### Let's start
+
 ```go
-import "github.com/elazarl/goproxy"
+import "github.com/Chiggy-Playz/goproxy"
 ```
 
 There are some proxy usage examples in the `examples` folder, which
@@ -197,7 +209,7 @@ cover the most common cases. Take a look at them and good luck!
 
 ## Request & Response manipulation
 
-There are 3  different types of handlers to manipulate the behavior of the proxy, as follows:
+There are 3 different types of handlers to manipulate the behavior of the proxy, as follows:
 
 ```go
 // handler called after receiving HTTP CONNECT from the client, and
@@ -205,17 +217,17 @@ There are 3  different types of handlers to manipulate the behavior of the proxy
 httpsHandlers   []HttpsHandler
 
 // handler called before proxy sends HTTP request to destination host
-reqHandlers     []ReqHandler 
+reqHandlers     []ReqHandler
 
 // handler called after proxy receives HTTP Response from destination host,
 // and before proxy forwards the Response to the client
-respHandlers    []RespHandler 
+respHandlers    []RespHandler
 ```
 
 Depending on what you want to manipulate, the ways to add handlers to each of the previous lists are:
 
 ```go
-// Add handlers to httpsHandlers 
+// Add handlers to httpsHandlers
 proxy.OnRequest(some ReqConditions).HandleConnect(YourHandlerFunc())
 
 // Add handlers to reqHandlers
@@ -245,7 +257,9 @@ proxy.OnRequest(goproxy.UrlMatches(regexp.MustCompile(`.*gif$`))).Do(YourReqHand
 ```
 
 ## Error handling
+
 ### Generic error
+
 If an error occurs while handling a request through the proxy, by default
 the proxy returns HTTP error `500` (Internal Server Error) with the `error
 message` as the `body` content.
@@ -257,6 +271,7 @@ if any, or the `nil` value, if no error happened.
 
 You can handle it as you wish, including returning a custom JSON as the body.
 Example of an error handler:
+
 ```
 proxy.OnResponse().DoFunc(func(resp *http.Response, ctx *goproxy.ProxyCtx) *http.Response {
 	var dnsError *net.DNSError
@@ -270,6 +285,7 @@ proxy.OnResponse().DoFunc(func(resp *http.Response, ctx *goproxy.ProxyCtx) *http
 ```
 
 ### Connection error
+
 If an error occurs while sending data to the target remote server (or to
 the proxy client), the `proxy.ConnectionErrHandler` is called to handle the
 error, if present, else a `default handler` will be used.
@@ -286,6 +302,7 @@ The `connection` will be `automatically closed` by the proxy library after the
 error handler call, so you don't have to worry about it.
 
 ## Project Status
+
 This project has been created `10 years` ago, and has reached a stage of
 `maturity`. It can be safely used in `production`, and many projects
 already do that.
@@ -294,6 +311,7 @@ If there will be any `breaking change` in the future, a `new version` of the
 Go module will be released (e.g. v2).
 
 ## Trusted, as a direct dependency, by:
+
 <p align="left">
 <a href="https://github.com/stripe/goproxy" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/856813?s=50" alt="Stripe" title="Stripe" /> </a>
 <a href="https://github.com/dependabot/goproxy" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/27347476?s=50" alt="Dependabot" title="Dependabot" /> </a>

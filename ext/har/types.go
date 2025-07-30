@@ -12,7 +12,7 @@ import (
     "strings"
     "time"
 
-    "github.com/elazarl/goproxy"
+    "github.com/Chiggy-Playz/goproxy"
 )
 
 type Har struct {

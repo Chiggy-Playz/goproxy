@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"flag"
-	"github.com/elazarl/goproxy"
+	"github.com/Chiggy-Playz/goproxy"
 	"io"
 	"log"
 	"net/http"

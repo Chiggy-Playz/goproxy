@@ -397,14 +397,15 @@ func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request
 						// RFC7230: A server MUST NOT send a Content-Length header field in any response
 						// with a status code of 1xx (Informational) or 204 (No Content)
 						resp.Header.Del("Content-Length")
+					} else if resp.ContentLength >= 0 {
+						resp.Header.Set("Content-Length", strconv.FormatInt(resp.ContentLength, 10))
+						resp.Header.Del("Transfer-Encoding") // explicitly not chunked
 					} else {
-						// If content length is not set, we set transfer encoding to chunked
-						if (resp.Header.Get("Content-Length") == "")  {	
-							// Since we don't know the length of resp, return chunked encoded response
-							// TODO: use a more reasonable scheme
-							resp.Header.Del("Content-Length")
-							resp.Header.Set("Transfer-Encoding", "chunked")
-						}
+						// Since we don't know the length of resp, return chunked encoded response
+						// TODO: use a more reasonable scheme
+						resp.Header.Del("Content-Length")
+						resp.Header.Set("Transfer-Encoding", "chunked")
+
 					}
 					// Force connection close otherwise chrome will keep CONNECT tunnel open forever
 					if !isWebsocket {
@@ -443,6 +444,12 @@ func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request
 						resp.StatusCode == http.StatusNotModified {
 						// Don't write out a response body, when it's not allowed
 						// in RFC7230
+					} else if resp.ContentLength >= 0 {
+						_, err := io.CopyN(rawClientTls, resp.Body, resp.ContentLength)
+						if err != nil {
+							ctx.Warnf("Failed to copy body with fixed length: %v", err)
+							return false
+						}
 					} else {
 						chunked := newChunkedWriter(rawClientTls)
 						if _, err := io.Copy(chunked, resp.Body); err != nil {
